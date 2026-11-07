@@ -1,7 +1,8 @@
 # removebg - Free AI Background Remover & Editor
 
 > Powered by **HyperLogics InfoTech** ([https://hyperlogics.web.app/](https://hyperlogics.web.app/))  
-> Live Production URL: [https://removebg-281c8.web.app](https://removebg-281c8.web.app)
+> Live Production URL: [https://removebg-281c8.web.app](https://removebg-281c8.web.app)  
+> GitHub Repository: [https://github.com/tiwarivk1511/removebg.git](https://github.com/tiwarivk1511/removebg.git)
 
 ![removebg Banner](/removebg.png)
 
@@ -71,7 +72,7 @@
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/HyperLogics/removebg.git
+   git clone https://github.com/tiwarivk1511/removebg.git
    cd removebg
    ```
 
@@ -111,4 +112,5 @@ npx firebase-tools deploy --only hosting
 
 - **Website:** [https://hyperlogics.web.app/](https://hyperlogics.web.app/)
 - **Live Application:** [https://removebg-281c8.web.app](https://removebg-281c8.web.app)
+- **GitHub Repository:** [https://github.com/tiwarivk1511/removebg.git](https://github.com/tiwarivk1511/removebg.git)
 - **Copyright:** © HyperLogics InfoTech. All rights reserved.

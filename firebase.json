@@ -1,0 +1,13 @@
+{
+  "hosting": {
+    "public": "out",
+    "site": "removebg-281c8",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": true
+  }
+}

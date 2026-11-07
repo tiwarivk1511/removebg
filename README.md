@@ -4,7 +4,7 @@
 > Live Production URL: [https://removebg-281c8.web.app](https://removebg-281c8.web.app)  
 > GitHub Repository: [https://github.com/tiwarivk1511/removebg.git](https://github.com/tiwarivk1511/removebg.git)
 
-![removebg Banner](/removebg.png)
+![removebg Banner](/removebg_logo.png)
 
 ## Overview
 

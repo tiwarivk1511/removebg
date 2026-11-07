@@ -23,6 +23,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "Free AI Background Remover | 8K Ultra HD Cutouts | Powered by HyperLogics InfoTech",
   description: "Instantly remove image backgrounds online for free using proprietary AI edge detection algorithms powered by HyperLogics InfoTech. Zero server file storage, 8K Ultra HD PNG download, 100% private real-time processing.",
+  icons: {
+    icon: "/rbg_logo.png",
+    shortcut: "/rbg_logo.png",
+    apple: "/rbg_logo.png",
+  },
   keywords: [
     "background remover",
     "remove bg",
@@ -80,6 +85,8 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <link rel="icon" href="/rbg_logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/rbg_logo.png" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8719202935652940"

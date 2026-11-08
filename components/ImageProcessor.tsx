@@ -96,17 +96,19 @@ export default function ImageProcessor({
   const loadedImageRef = useRef<HTMLImageElement | null>(null);
   const isDraggingSlider = useRef(false);
   const initialLoadedRef = useRef(false);
+  const lastPctRef = useRef<number>(0);
 
   // Deep Learning Neural AI Background Removal Pipeline
   useEffect(() => {
     let mounted = true;
     initialLoadedRef.current = false;
+    lastPctRef.current = 0;
     setIsProcessing(true);
 
     const runNeuralAiPipeline = async () => {
       try {
-        // Yield to browser UI thread before starting heavy processing
-        await new Promise((resolve) => setTimeout(resolve, 80));
+        // Yield to browser UI thread to keep full page rendering fluid
+        await new Promise((resolve) => setTimeout(resolve, 60));
 
         setProgress(20);
         setProgressStep("Loading Deep Neural AI Segmentation Model...");
@@ -133,14 +135,18 @@ export default function ImageProcessor({
 
         setProgress(40);
         setProgressStep("Extracting Subject, Hair & Fine Edges...");
-        await new Promise((resolve) => setTimeout(resolve, 50));
+        await new Promise((resolve) => setTimeout(resolve, 40));
 
         const blob: Blob = await removeBackground(imageInput, {
           progress: (key: string, current: number, total: number) => {
             if (mounted && total > 0) {
               const pct = Math.round((current / total) * 100);
-              setProgress(20 + Math.round(pct * 0.75));
-              setProgressStep(`AI Processing (${pct}%)...`);
+              // Throttle state updates (only update every 5%) to prevent React re-render thrashing
+              if (Math.abs(pct - lastPctRef.current) >= 5 || pct === 100) {
+                lastPctRef.current = pct;
+                setProgress(20 + Math.round(pct * 0.75));
+                setProgressStep(`AI Processing (${pct}%)...`);
+              }
             }
           },
         });
@@ -152,7 +158,7 @@ export default function ImageProcessor({
         setProgress(100);
         setProgressStep("Complete!");
         initialLoadedRef.current = true;
-        setTimeout(() => setIsProcessing(false), 100);
+        setTimeout(() => setIsProcessing(false), 80);
       } catch (err) {
         console.error("AI Neural Background Removal Error:", err);
       }
@@ -389,19 +395,19 @@ export default function ImageProcessor({
   };
 
   return (
-    <div className="w-full max-w-5xl mx-auto space-y-6">
+    <div className="w-full max-w-5xl mx-auto space-y-6 min-h-[420px]">
       {/* Sleek Pulse Loader Processing View */}
       {isProcessing ? (
-        <div className="glass-card bg-white/95 rounded-3xl p-12 border border-slate-200 text-center flex flex-col items-center justify-center space-y-6 min-h-[420px] shadow-xl touch-pan-y">
-          <div className="relative w-24 h-24 flex items-center justify-center">
+        <div className="glass-card bg-white/95 rounded-3xl p-8 sm:p-12 border border-slate-200 text-center flex flex-col items-center justify-center space-y-6 min-h-[420px] shadow-xl touch-pan-y">
+          <div className="relative w-20 h-20 sm:w-24 sm:h-24 flex items-center justify-center">
             <div className="absolute inset-0 rounded-full bg-cyan-500/20 animate-ping opacity-75" />
-            <div className="relative w-20 h-20 rounded-full bg-cyan-50 border-2 border-cyan-500 flex items-center justify-center shadow-lg shadow-cyan-500/20">
-              <Cpu className="w-10 h-10 text-cyan-600 animate-spin" style={{ animationDuration: "3s" }} />
+            <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-cyan-50 border-2 border-cyan-500 flex items-center justify-center shadow-lg shadow-cyan-500/20">
+              <Cpu className="w-8 h-8 sm:w-10 sm:h-10 text-cyan-600 animate-spin" style={{ animationDuration: "3s" }} />
             </div>
           </div>
 
-          <div className="space-y-2 max-w-sm">
-            <h3 className="text-2xl font-black text-slate-900 tracking-tight">
+          <div className="space-y-2 max-w-sm px-2">
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
               AI Deep Neural Network Segmentation
             </h3>
             <p className="text-xs text-cyan-600 font-bold animate-pulse">
@@ -416,69 +422,69 @@ export default function ImageProcessor({
             />
           </div>
 
-          <span className="text-xs font-bold text-slate-600 flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-emerald-600" /> Proprietary AI Deep Neural Network Model v5.0 (HyperLogics Engine)
+          <span className="text-[11px] sm:text-xs font-bold text-slate-600 flex items-center gap-1.5 px-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" /> Proprietary AI Deep Neural Network Model v5.0 (HyperLogics Engine)
           </span>
         </div>
       ) : (
         /* Result View & Controls */
         <div className="space-y-6">
           {/* Action Bar */}
-          <div className="glass-card bg-white/95 rounded-2xl p-4 border border-slate-200 flex flex-wrap items-center justify-between gap-4 shadow-lg">
-            <div className="flex items-center space-x-3">
+          <div className="glass-card bg-white/95 rounded-2xl p-3 sm:p-4 border border-slate-200 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 shadow-lg">
+            <div className="flex items-center justify-between md:justify-start space-x-3">
               <button
                 onClick={onReset}
-                className="px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all"
+                className="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 text-xs font-bold flex items-center gap-1.5 transition-all shrink-0"
               >
-                <RotateCcw className="w-4 h-4 text-cyan-600" /> New Image
+                <RotateCcw className="w-3.5 h-3.5 text-cyan-600" /> New Image
               </button>
-              <div className="hidden sm:flex items-center text-xs text-slate-600 space-x-2 font-semibold">
-                <span>File: <strong className="text-slate-900">{filename}</strong></span>
+              <div className="hidden sm:flex items-center text-xs text-slate-600 space-x-2 font-semibold truncate">
+                <span>File: <strong className="text-slate-900 truncate max-w-[120px] inline-block align-bottom">{filename}</strong></span>
                 <span>•</span>
-                <span>Export Target: <strong className="text-cyan-600 font-bold">8K Ultra HD (7680px)</strong></span>
+                <span>Target: <strong className="text-cyan-600 font-bold">8K Ultra HD</strong></span>
               </div>
             </div>
 
             {/* View Modes & Export */}
-            <div className="flex items-center space-x-3">
-              <div className="bg-slate-100 p-1 rounded-xl border border-slate-200 flex items-center space-x-1">
+            <div className="flex flex-wrap items-center justify-between md:justify-end gap-2 sm:gap-3">
+              <div className="bg-slate-100 p-1 rounded-xl border border-slate-200 flex items-center space-x-1 shrink-0 overflow-x-auto max-w-full">
                 <button
                   onClick={() => setViewMode("slider")}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all whitespace-nowrap ${
                     viewMode === "slider"
                       ? "bg-white text-cyan-600 shadow-md border border-slate-200"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  <ArrowRightLeft className="w-3.5 h-3.5" /> Compare
+                  <ArrowRightLeft className="w-3.5 h-3.5" /> <span>Compare</span>
                 </button>
                 <button
                   onClick={() => setViewMode("sideBySide")}
-                  className={`px-3 py-1.5 rounded-md text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all whitespace-nowrap ${
                     viewMode === "sideBySide"
                       ? "bg-white text-cyan-600 shadow-md border border-slate-200"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  <Columns className="w-3.5 h-3.5" /> Side-by-Side
+                  <Columns className="w-3.5 h-3.5" /> <span className="hidden sm:inline">Side-by-Side</span><span className="sm:hidden">2-Up</span>
                 </button>
                 <button
                   onClick={() => setViewMode("touchup")}
-                  className={`px-3 py-1.5 rounded-md text-xs font-bold flex items-center gap-1.5 transition-all ${
+                  className={`px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1 transition-all whitespace-nowrap ${
                     viewMode === "touchup"
                       ? "bg-white text-cyan-600 shadow-md border border-slate-200"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  <Eraser className="w-3.5 h-3.5" /> Touch-Up Studio
+                  <Eraser className="w-3.5 h-3.5" /> <span>Touch-Up</span>
                 </button>
               </div>
 
               <button
                 onClick={handleDownload}
-                className="px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-black text-xs sm:text-sm shadow-lg shadow-cyan-500/20 flex items-center gap-2 transition-all glow-cyan"
+                className="flex-1 md:flex-initial px-4 sm:px-6 py-2.5 rounded-xl bg-gradient-to-r from-cyan-500 via-sky-500 to-blue-600 hover:from-cyan-600 hover:to-blue-700 text-white font-black text-xs sm:text-sm shadow-lg shadow-cyan-500/20 flex items-center justify-center gap-2 transition-all glow-cyan shrink-0 whitespace-nowrap"
               >
-                <Download className="w-4 h-4" /> Download 8K Ultra HD
+                <Download className="w-4 h-4" /> <span>Download 8K</span>
               </button>
             </div>
           </div>

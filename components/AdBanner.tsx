@@ -115,7 +115,7 @@ export default function AdBanner({
             HyperLogics InfoTech
           </h4>
           <h4 className="text-xs sm:text-sm font-black text-slate-900">
-            Need Custom AI & Web App Solutions for Your Business?
+            Need Custom Software, Website, or Mobile App Solutions for Your Business?
           </h4>
           <p className="text-[11px] sm:text-xs font-semibold text-slate-600">
             HyperLogics InfoTech builds high-performance web applications, AI integration, and custom cloud architecture.

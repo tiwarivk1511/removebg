@@ -51,14 +51,14 @@ export default function Home() {
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="text-center max-w-4xl mx-auto space-y-5 pt-2"
+          className="text-center max-w-4xl mx-auto space-y-5 pt-2 px-2"
         >
           {/* Status Badge */}
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ delay: 0.1, duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 text-cyan-600 text-xs font-black tracking-wide shadow-md shadow-cyan-500/10"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-cyan-600 text-[11px] sm:text-xs font-black tracking-wide shadow-md shadow-cyan-500/10"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -72,7 +72,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2, duration: 0.5 }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.12]"
+            className="text-3xl sm:text-6xl lg:text-7xl font-black tracking-tight text-slate-900 leading-[1.12]"
           >
             Remove Image Backgrounds{" "}
             <span className="bg-gradient-to-r from-cyan-600 via-sky-600 to-blue-600 bg-clip-text text-transparent">
@@ -85,7 +85,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.5 }}
-            className="text-base sm:text-xl text-slate-700 leading-relaxed font-semibold max-w-2xl mx-auto"
+            className="text-sm sm:text-xl text-slate-700 leading-relaxed font-semibold max-w-2xl mx-auto"
           >
             Upload any PNG, JPG, or WebP photo for sub-pixel AI background removal.
             100% private, real-time processing powered by{" "}
@@ -103,8 +103,7 @@ export default function Home() {
                 />
               </span>
               HyperLogics InfoTech
-            </a>
-            .
+            </a>.
           </motion.p>
 
           {/* Key Stat Pills */}
@@ -112,12 +111,12 @@ export default function Home() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 0.5 }}
-            className="flex flex-wrap items-center justify-center gap-4 pt-2 text-xs font-bold text-slate-800"
+            className="flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 pt-1 text-xs font-bold text-slate-800"
           >
-            <span className="flex items-center gap-1.5 text-cyan-700 bg-cyan-50 px-4 py-1.5 rounded-full border border-cyan-200 shadow-sm">
+            <span className="flex items-center gap-1.5 text-cyan-700 bg-cyan-50 px-3.5 py-1.5 rounded-full border border-cyan-200 shadow-sm">
               <CheckCircle2 className="w-4 h-4 text-cyan-600" /> Free 8K HD Downloads
             </span>
-            <span className="flex items-center gap-1.5 text-emerald-700 bg-emerald-50 px-4 py-1.5 rounded-full border border-emerald-200 shadow-sm">
+            <span className="flex items-center gap-1.5 text-emerald-700 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200 shadow-sm">
               <Lock className="w-4 h-4 text-emerald-600" /> Instant Tab-Close Deletion
             </span>
             <span className="flex items-center gap-1.5 text-amber-700 bg-amber-50 px-4 py-1.5 rounded-full border border-amber-200 shadow-sm">
@@ -126,34 +125,36 @@ export default function Home() {
           </motion.div>
         </motion.div>
 
-        {/* Studio Mode Switcher: Single Image vs Bulk Processing */}
+        {/* Studio Mode Switcher: Responsive Single Image vs Bulk Processing Tab */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.45, duration: 0.4 }}
-          className="flex items-center justify-center space-x-2 bg-slate-200/80 p-1.5 rounded-2xl border border-slate-300 max-w-2xl w-full mx-auto shadow-inner"
+          className="flex items-center justify-center p-1 bg-slate-200/80 rounded-2xl border border-slate-300 max-w-xl w-full mx-auto shadow-inner space-x-1"
         >
           <button
             onClick={() => setProcessingMode("single")}
-            className={`flex-1 py-3 px-6 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center justify-center gap-2 transition-all ${
+            className={`flex-1 py-2.5 px-3 sm:px-5 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-1.5 transition-all ${
               processingMode === "single"
                 ? "bg-white text-cyan-600 shadow-md border border-slate-200"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            <Sparkles className="w-4 h-4 text-cyan-600 shrink-0" />
-            <span>Single Image Studio</span>
+            <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-600 shrink-0" />
+            <span className="hidden sm:inline">Single Image Studio</span>
+            <span className="sm:hidden">Single Studio</span>
           </button>
           <button
             onClick={() => setProcessingMode("bulk")}
-            className={`flex-1 py-3 px-6 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap flex items-center justify-center gap-2 transition-all ${
+            className={`flex-1 py-2.5 px-3 sm:px-5 rounded-xl text-xs sm:text-sm font-extrabold flex items-center justify-center gap-1.5 transition-all ${
               processingMode === "bulk"
                 ? "bg-white text-cyan-600 shadow-md border border-slate-200"
                 : "text-slate-600 hover:text-slate-900"
             }`}
           >
-            <FolderArchive className="w-4 h-4 text-cyan-600 shrink-0" />
-            <span>Bulk Batch (Up to 500 Images → ZIP)</span>
+            <FolderArchive className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-cyan-600 shrink-0" />
+            <span className="hidden sm:inline">Bulk Batch (500 → ZIP)</span>
+            <span className="sm:hidden">Bulk (500 ZIP)</span>
           </button>
         </motion.div>
 
@@ -164,10 +165,10 @@ export default function Home() {
               {processingMode === "single" ? (
                 <motion.div
                   key="single"
-                  initial={{ opacity: 0, x: -15 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: 15 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
                 >
                   {!activeImage ? (
                     <DropzoneUploader onImageSelected={handleImageSelected} />
@@ -183,10 +184,10 @@ export default function Home() {
               ) : (
                 <motion.div
                   key="bulk"
-                  initial={{ opacity: 0, x: 15 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -15 }}
-                  transition={{ duration: 0.3 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
                 >
                   <BulkProcessor />
                 </motion.div>

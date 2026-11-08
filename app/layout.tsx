@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
+import FirebaseAnalytics from "@/components/FirebaseAnalytics";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -98,6 +99,7 @@ export default function RootLayout({
         className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-cyan-500 selection:text-white"
         suppressHydrationWarning
       >
+        <FirebaseAnalytics />
         {children}
       </body>
     </html>

@@ -29,17 +29,55 @@ export const metadata: Metadata = {
     shortcut: "/rbg_logo.png",
     apple: "/rbg_logo.png",
   },
+  other: {
+    "google-adsense-account": "ca-pub-8719202935652940",
+  },
   keywords: [
+    // Core & High-Volume Search Keywords
     "background remover",
     "remove bg",
     "free background remover",
     "AI background removal",
     "transparent background maker",
-    "HyperLogics InfoTech",
+    "remove background from image",
+    "background eraser online",
+    "make image transparent",
+    "cut out image background",
+    "automatic background remover",
+    "remove bg free alternative",
+    "free photo cutout tool",
     "8K background remover",
     "photo editor online free",
-    "zero server storage photo editor",
-    "magic eraser tool"
+    "magic eraser tool",
+    "bulk background remover",
+    "batch background removal zip",
+
+    // Technical & Architecture Keywords
+    "HyperLogics InfoTech",
+    "ONNX WASM AI model",
+    "client side AI background removal",
+    "sub pixel alpha masking",
+    "CIELAB color space segmentation",
+    "WebAssembly image processing",
+    "deep learning image segmentation",
+    "browser GPU acceleration",
+    "zero server file storage privacy",
+    "instant tab close data purge",
+    "lossless HD transparent PNG export",
+    "dual color gradient generator",
+
+    // Target Audience & Use-Case Keywords
+    "background remover for graphic designers",
+    "background remover for ecommerce sellers",
+    "background remover for photographers",
+    "Amazon product photo background remover",
+    "Shopify photo background editor",
+    "background remover for social media creators",
+    "passport photo background remover",
+    "marketing banner image cutout",
+    "real estate photo background remover",
+    "car product photo background eraser",
+    "hair and fur detail background removal"
   ],
   authors: [{ name: "HyperLogics InfoTech", url: "https://hyperlogics.web.app/" }],
   creator: "HyperLogics InfoTech",
@@ -86,6 +124,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <meta name="google-adsense-account" content="ca-pub-8719202935652940" />
         <link rel="icon" href="/rbg_logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/rbg_logo.png" />
         <script

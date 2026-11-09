@@ -1,20 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://hyperlogics.web.app/</loc>
-    <lastmod>2025-03-01</lastmod>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://hyperlogics.web.app/removebg_logo.png</image:loc>
+      <image:title>removebg Logo - Free AI Background Remover by HyperLogics InfoTech</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://hyperlogics.web.app/bulk</loc>
+    <lastmod>2026-03-01</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
   </url>
   <url>
     <loc>https://hyperlogics.web.app/privacy</loc>
-    <lastmod>2025-03-01</lastmod>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>
   <url>
     <loc>https://hyperlogics.web.app/terms</loc>
-    <lastmod>2025-03-01</lastmod>
+    <lastmod>2026-03-01</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
   </url>

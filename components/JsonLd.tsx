@@ -3,8 +3,15 @@ export default function JsonLd() {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "removebg by HyperLogics InfoTech",
-    "alternateName": ["remove bg", "remove.bg free alternative", "remove bg 8k", "remove.bg HD", "free AI background remover"],
-    "operatingSystem": "All (Web Browser, Mobile, Tablet, Desktop)",
+    "alternateName": [
+      "remove bg",
+      "remove.bg free alternative",
+      "remove bg 8k",
+      "remove.bg HD",
+      "free AI background remover",
+      "bulk background remover"
+    ],
+    "operatingSystem": "All (Web Browser, Windows, macOS, Linux, iOS, Android)",
     "applicationCategory": "MultimediaApplication",
     "offers": {
       "@type": "Offer",
@@ -13,6 +20,7 @@ export default function JsonLd() {
     },
     "description": "Free AI Background Remover and best remove.bg alternative powered by HyperLogics InfoTech. Extract 8K Ultra HD transparent PNG cutouts for free without watermarks, subscriptions, or server file storage.",
     "url": "https://hyperlogics.web.app/",
+    "image": "https://hyperlogics.web.app/rbg_logo.png",
     "author": {
       "@type": "Organization",
       "name": "HyperLogics InfoTech",
@@ -29,7 +37,36 @@ export default function JsonLd() {
       "100% Free Without Credits or Watermark",
       "Proprietary CIELAB AI Edge & Hair Masking Algorithm",
       "Real-Time Magic Eraser & Touch-Up Brush Studio",
-      "Custom Color Picker & Photo Background Replacer"
+      "Custom Color Picker & Photo Background Replacer",
+      "Batch Bulk Processing up to 500 Images with ZIP Download"
+    ]
+  };
+
+  const howToSchema = {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    "name": "How to Remove Background from Image for Free in 8K Ultra HD",
+    "description": "Step-by-step guide to removing photo backgrounds online using removebg by HyperLogics InfoTech.",
+    "image": "https://hyperlogics.web.app/rbg_logo.png",
+    "step": [
+      {
+        "@type": "HowToStep",
+        "position": 1,
+        "name": "Upload Your Image",
+        "text": "Drag and drop any PNG, JPG, or WebP photo up to 15MB into the uploader."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 2,
+        "name": "AI Edge Extraction",
+        "text": "The deep neural network AI automatically detects subjects, hair strands, and contours in under 1 second."
+      },
+      {
+        "@type": "HowToStep",
+        "position": 3,
+        "name": "Customize & Export 8K",
+        "text": "Replace backdrops with solid studio colors, dual gradients, or download the 8K Ultra HD transparent PNG cutout instantly."
+      }
     ]
   };
 
@@ -47,10 +84,10 @@ export default function JsonLd() {
       },
       {
         "@type": "Question",
-        "name": "How does removebg compare to remove.bg in terms of image quality and privacy?",
+        "name": "How do I remove the background from multiple images in bulk for free?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "removebg provides superior 8K Ultra HD cutout resolution and enforces a strict Zero Server Storage Policy. Photos are processed in real-time in your session and immediately deleted when you close the tab, whereas other tools cache files on cloud servers."
+          "text": "Switch to Bulk Batch Mode on removebg by HyperLogics InfoTech. Upload up to 500 images at once, process them concurrently with AI precision, and download all transparent PNG cutouts in a single ZIP archive."
         }
       },
       {
@@ -72,6 +109,18 @@ export default function JsonLd() {
     ]
   };
 
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "HyperLogics InfoTech",
+    "url": "https://hyperlogics.web.app/",
+    "logo": "https://hyperlogics.web.app/favicon.ico",
+    "sameAs": [
+      "https://hyperlogics.web.app/",
+      "https://github.com/tiwarivk1511/removebg.git"
+    ]
+  };
+
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -85,12 +134,18 @@ export default function JsonLd() {
       {
         "@type": "ListItem",
         "position": 2,
+        "name": "Bulk Batch 500",
+        "item": "https://hyperlogics.web.app/bulk"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
         "name": "Privacy Policy",
         "item": "https://hyperlogics.web.app/privacy"
       },
       {
         "@type": "ListItem",
-        "position": 3,
+        "position": 4,
         "name": "Terms of Service",
         "item": "https://hyperlogics.web.app/terms"
       }
@@ -105,7 +160,15 @@ export default function JsonLd() {
       />
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToSchema) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
       />
       <script
         type="application/ld+json"

@@ -1,6 +1,16 @@
+# Allow all search engine crawlers & AI engine agents
 User-agent: *
 Allow: /
 Disallow: /api/
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
 
 User-agent: GPTBot
 Allow: /
@@ -18,3 +28,4 @@ User-agent: Google-Extended
 Allow: /
 
 Sitemap: https://hyperlogics.web.app/sitemap.xml
+Sitemap: https://removebg-281c8.web.app/sitemap.xml

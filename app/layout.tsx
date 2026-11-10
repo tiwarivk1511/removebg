@@ -29,6 +29,9 @@ export const metadata: Metadata = {
     shortcut: "/rbg_logo.png",
     apple: "/rbg_logo.png",
   },
+  verification: {
+    google: "Y211WQLWdfyh7PZgJsrSb0qvSLBZjQh6bD8w00yDTM0",
+  },
   other: {
     "google-adsense-account": "ca-pub-8719202935652940",
   },
@@ -124,6 +127,7 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
+        <meta name="google-site-verification" content="Y211WQLWdfyh7PZgJsrSb0qvSLBZjQh6bD8w00yDTM0" />
         <meta name="google-adsense-account" content="ca-pub-8719202935652940" />
         <link rel="icon" href="/rbg_logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/rbg_logo.png" />

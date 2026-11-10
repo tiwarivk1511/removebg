@@ -1,7 +1,7 @@
 {
   "hosting": {
     "public": "out",
-    "site": "removebg-281c8",
+    "site": "removebg2",
     "ignore": [
       "firebase.json",
       "**/.*",

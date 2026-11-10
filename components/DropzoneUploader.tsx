@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, DragEvent, ChangeEvent } from "react";
-import { Upload, Image as ImageIcon, Sparkles, FileImage, ShieldCheck, Zap, Lock } from "lucide-react";
+import { useState, useRef, DragEvent, ChangeEvent, FormEvent } from "react";
+import { Upload, Image as ImageIcon, Sparkles, FileImage, Zap, Lock, Link2, ArrowRight, Loader2 } from "lucide-react";
 
 interface DropzoneUploaderProps {
   onImageSelected: (file: File | null, previewUrl: string, name: string) => void;
@@ -31,6 +31,8 @@ const SAMPLE_IMAGES = [
 export default function DropzoneUploader({ onImageSelected }: DropzoneUploaderProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [imageUrlInput, setImageUrlInput] = useState("");
+  const [isUrlLoading, setIsUrlLoading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const validateAndProcessFile = (file: File) => {
@@ -81,6 +83,40 @@ export default function DropzoneUploader({ onImageSelected }: DropzoneUploaderPr
     }
   };
 
+  const handleUrlSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!imageUrlInput.trim()) return;
+
+    setErrorMsg(null);
+    setIsUrlLoading(true);
+
+    try {
+      const cleanUrl = imageUrlInput.trim();
+      const response = await fetch(cleanUrl);
+      if (!response.ok) {
+        throw new Error("Unable to fetch image from URL. Please check the URL.");
+      }
+      const blob = await response.blob();
+      if (!blob.type.startsWith("image/")) {
+        throw new Error("URL does not point to a valid image file.");
+      }
+
+      const filename =
+        cleanUrl.substring(cleanUrl.lastIndexOf("/") + 1).split("?")[0] || "imported-photo.jpg";
+      const file = new File([blob], filename, { type: blob.type });
+
+      const objectUrl = URL.createObjectURL(blob);
+      onImageSelected(file, objectUrl, filename);
+    } catch (err: any) {
+      setErrorMsg(
+        err.message || "Failed to load image from URL. Please ensure the URL is publicly accessible."
+      );
+    } finally {
+      setIsUrlLoading(false);
+    }
+  };
+
   const handleSampleClick = (sample: typeof SAMPLE_IMAGES[0]) => {
     setErrorMsg(null);
     onImageSelected(null, sample.url, `${sample.label}.jpg`);
@@ -94,7 +130,7 @@ export default function DropzoneUploader({ onImageSelected }: DropzoneUploaderPr
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
         onClick={() => fileInputRef.current?.click()}
-        className={`relative group cursor-pointer rounded-3xl transition-all duration-300 p-5 xs:p-8 sm:p-12 text-center border-2 border-dashed ${
+        className={`relative group cursor-pointer rounded-3xl transition-all duration-300 p-5 xs:p-8 sm:p-10 text-center border-2 border-dashed ${
           isDragging
             ? "border-cyan-500 bg-sky-100/50 scale-[1.01] glow-cyan"
             : "border-cyan-400/80 hover:border-cyan-600 glass-card bg-white/95"
@@ -135,8 +171,42 @@ export default function DropzoneUploader({ onImageSelected }: DropzoneUploaderPr
             <span>Upload Image</span>
           </button>
 
+          {/* Image Web URL Import Input Bar */}
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-md mx-auto pt-2"
+          >
+            <form
+              onSubmit={handleUrlSubmit}
+              className="flex items-center gap-2 p-1.5 bg-slate-100/90 rounded-2xl border border-slate-200 shadow-inner"
+            >
+              <div className="flex items-center gap-2 px-3 text-slate-500 shrink-0">
+                <Link2 className="w-4 h-4 text-cyan-600" />
+              </div>
+              <input
+                type="url"
+                value={imageUrlInput}
+                onChange={(e) => setImageUrlInput(e.target.value)}
+                placeholder="Paste image web URL (https://...)"
+                className="flex-1 bg-transparent text-xs font-semibold text-slate-900 focus:outline-none placeholder:text-slate-400 min-w-0"
+              />
+              <button
+                type="submit"
+                disabled={isUrlLoading || !imageUrlInput.trim()}
+                className="px-3.5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-700 disabled:opacity-40 text-white font-extrabold text-xs shadow-md transition-all shrink-0 flex items-center gap-1"
+              >
+                {isUrlLoading ? (
+                  <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                ) : (
+                  <ArrowRight className="w-3.5 h-3.5" />
+                )}
+                <span>URL</span>
+              </button>
+            </form>
+          </div>
+
           {/* Feature Badges */}
-          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 pt-2 text-[11px] sm:text-xs text-slate-700 font-bold">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5 pt-1 text-[11px] sm:text-xs text-slate-700 font-bold">
             <span className="px-2.5 sm:px-3.5 py-1 sm:py-1.5 rounded-full bg-slate-100 border border-slate-200 flex items-center gap-1 shadow-sm">
               <FileImage className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-cyan-600 shrink-0" /> PNG, JPG, WebP
             </span>

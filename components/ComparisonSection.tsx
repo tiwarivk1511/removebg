@@ -11,6 +11,18 @@ const COMPARISON_ROWS = [
     others: "Low Res / Watermarked",
   },
   {
+    feature: "Bulk Batch Processing",
+    removebg: "Up to 500 Images → ZIP",
+    traditional: "Paid Add-on / API Only",
+    others: "1 Image at a Time",
+  },
+  {
+    feature: "Input Methods",
+    removebg: "Upload, Drag & Drop, URL, Samples",
+    traditional: "Basic File Upload Only",
+    others: "Basic Upload Only",
+  },
+  {
     feature: "Cost & Subscriptions",
     removebg: "100% Free Forever",
     traditional: "Monthly Paid Subscription",
@@ -35,8 +47,8 @@ const COMPARISON_ROWS = [
     others: "Watermarked",
   },
   {
-    feature: "Real-Time Touch-Up Brush Studio",
-    removebg: "Included Free (Eraser & Restore)",
+    feature: "Touch-Up & Custom Backdrop Studio",
+    removebg: "Magic Eraser, Dual Gradients, 3D Shadow",
     traditional: "Basic Brush Only",
     others: "Paid Add-on",
   },
@@ -74,7 +86,7 @@ export default function ComparisonSection() {
           className="glass-card bg-white rounded-3xl border border-slate-200 overflow-hidden shadow-xl"
         >
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse min-w-[600px]">
+            <table className="w-full text-left border-collapse min-w-[650px]">
               <thead>
                 <tr className="bg-slate-100/90 border-b border-slate-200 text-xs uppercase tracking-wider font-black text-slate-700">
                   <th className="p-4 sm:p-5">Feature & Capabilities</th>

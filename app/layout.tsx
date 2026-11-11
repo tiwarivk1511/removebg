@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import JsonLd from "@/components/JsonLd";
 import FirebaseAnalytics from "@/components/FirebaseAnalytics";
+import GoogleTagManager from "@/components/GoogleTagManager";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -21,6 +22,10 @@ export const viewport: Viewport = {
   maximumScale: 5,
 };
 
+const gtmId = process.env.NEXT_PUBLIC_GTM_ID || "GTM-N379L42K";
+const googleVerification = process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || "Y211WQLWdfyh7PZgJsrSb0qvSLBZjQh6bD8w00yDTM0";
+const adsenseClientId = process.env.NEXT_PUBLIC_ADSENSE_CLIENT_ID || "ca-pub-8719202935652940";
+
 export const metadata: Metadata = {
   title: "Free AI Background Remover | 8K Ultra HD Cutouts | Powered by HyperLogics InfoTech",
   description: "Instantly remove image backgrounds online for free using proprietary AI edge detection algorithms powered by HyperLogics InfoTech. Zero server file storage, 8K Ultra HD PNG download, 100% private real-time processing.",
@@ -30,10 +35,10 @@ export const metadata: Metadata = {
     apple: "/rbg_logo.png",
   },
   verification: {
-    google: "Y211WQLWdfyh7PZgJsrSb0qvSLBZjQh6bD8w00yDTM0",
+    google: googleVerification,
   },
   other: {
-    "google-adsense-account": "ca-pub-8719202935652940",
+    "google-adsense-account": adsenseClientId,
   },
   keywords: [
     // Core & High-Volume Search Keywords
@@ -127,21 +132,32 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <head>
-        <meta name="google-site-verification" content="Y211WQLWdfyh7PZgJsrSb0qvSLBZjQh6bD8w00yDTM0" />
-        <meta name="google-adsense-account" content="ca-pub-8719202935652940" />
+        <meta name="google-site-verification" content={googleVerification} />
+        <meta name="google-adsense-account" content={adsenseClientId} />
         <link rel="icon" href="/rbg_logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/rbg_logo.png" />
         <script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8719202935652940"
+          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseClientId}`}
           crossOrigin="anonymous"
         />
+        <GoogleTagManager />
         <JsonLd />
       </head>
       <body
         className="min-h-screen flex flex-col bg-slate-50 text-slate-900 font-sans selection:bg-cyan-500 selection:text-white"
         suppressHydrationWarning
       >
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+
         <FirebaseAnalytics />
         {children}
       </body>
